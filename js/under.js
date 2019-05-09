@@ -17,7 +17,7 @@ Matrics.prototype.full_matr = function(){
 		for (let j = 0; j < this.H; j++) {
 			if(i == 0||i ==this.W-1||j == 0||j ==this.H-1)		
 					this.matrix[i][j] = [255,255,255];
-				else
+			else
 					this.matrix[i][j] =[0,0,0]// [255/(this.W-1)*i,-255/(this.W-1)*i+255/(this.H-1)*j,255/(this.H-1)*j]
 		}		
 	};
@@ -91,10 +91,14 @@ Player.prototype.die = function(){
 		for (let j = 0; j < this.matr.H; j++) 
 			if(this.matr.matrix[i][j]==this.color_id)
 				this.matr.matrix[i][j] =[0,0,0] ;	
-	
+			let loc,n = 0;
+	do{
+		 loc = [randomInteger(5, this.matr.W-5),randomInteger(5, this.matr.H-5)]
+		 n++;
+	}while(!this.matr.matrix[loc[0]][loc[1]].every(function(x){return x==0}||n<10000))
 	
 this.capacity = 0;
-this.location = [randomInteger(5, this.matr.W-5),randomInteger(5, this.matr.H-5)];
+this.location = loc;
 this.max_x = this.location[0]+1;
 this.max_y = this.location[1]+1;
 this.min_x = this.location[0]-1;
